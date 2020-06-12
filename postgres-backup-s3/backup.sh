@@ -59,10 +59,10 @@ POSTGRES_HOST_OPTS="-h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER $POSTG
 
 echo "Creating dump of ${POSTGRES_DATABASE} database from ${POSTGRES_HOST}..."
 
-pg_dump $POSTGRES_HOST_OPTS $POSTGRES_DATABASE | gzip | openssl enc -aes-256-cbc -e -pass pass:$ENCRYPTION_PASS > dump.sql.gz
+pg_dump $POSTGRES_HOST_OPTS $POSTGRES_DATABASE | gzip | openssl enc -aes-256-cbc -e -pass pass:$ENCRYPTION_PASS > dump.sql.gz.enc
 
 echo "Uploading dump to $S3_BUCKET"
 
-cat dump.sql.gz | aws $AWS_ARGS s3 cp - s3://$S3_BUCKET/$S3_PREFIX/${POSTGRES_DATABASE}_$(date +$DATE_FORMAT).sql.gz || exit 2
+cat dump.sql.gz.enc | aws $AWS_ARGS s3 cp - s3://$S3_BUCKET/$S3_PREFIX/${POSTGRES_DATABASE}_$(date +$DATE_FORMAT).sql.gz.enc || exit 2
 
 echo "SQL backup uploaded successfully"
