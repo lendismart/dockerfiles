@@ -21,5 +21,7 @@ chmod u+x /usr/local/bin/go-cron
 apk del curl
 
 
+apk add openssl
+
 # cleanup
 rm -rf /var/cache/apk/*

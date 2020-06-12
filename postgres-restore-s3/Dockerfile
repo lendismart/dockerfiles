@@ -1,8 +1,5 @@
 FROM alpine:3.7
 LABEL maintainer="Johannes Schickling <schickling.j@gmail.com>"
-RUN apk upgrade --update-cache --available && \
-    apk add openssl && \
-    rm -rf /var/cache/apk/*
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh
 
