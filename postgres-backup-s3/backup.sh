@@ -32,7 +32,7 @@ export AWS_DEFAULT_REGION=$S3_REGION
 export PGPASSWORD=$POSTGRES_PASSWORD
 POSTGRES_HOST_OPTS="  --encoding=UTF-8 --no-privileges --no-owner  $POSTGRES_EXTRA_OPTS"
 
-echo "Creating dump with ssl of ${POSTGRES_HOST_OPTS} database from..."
+echo "Creating dump with ssl2 of ${POSTGRES_HOST_OPTS} database from..."
 
 pg_dump $POSTGRES_HOST_OPTS | gzip | openssl enc -aes-256-cbc -e -pass pass:$ENCRYPTION_PASS > dump.sql.gz.enc
 
