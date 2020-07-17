@@ -34,7 +34,7 @@ export PGPASSWORD=$POSTGRES_PASSWORD
 
 echo "Creating dump with ssl2..."
 
-pg_dump --encoding=UTF-8 --no-privileges --no-owner  \"$POSTGRES_EXTRA_OPTS\" | gzip | openssl enc -aes-256-cbc -e -pass pass:$ENCRYPTION_PASS > dump.sql.gz.enc
+pg_dump --encoding=UTF-8 --no-privileges --no-owner  "${POSTGRES_EXTRA_OPTS}" | gzip | openssl enc -aes-256-cbc -e -pass pass:$ENCRYPTION_PASS > dump.sql.gz.enc
 
 echo "Uploading dump to $S3_BUCKET"
 
